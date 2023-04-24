@@ -14,12 +14,8 @@
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            v-for="(dropdown, index) in userDropdown"
-            :key="index"
-            :icon="dropdown.icon"
-            >{{ dropdown.name }}</el-dropdown-item
-          >
+          <!-- <el-dropdown-item @click.native="goHome">首页</el-dropdown-item> -->
+          <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -33,14 +29,7 @@ export default {
   data() {
     return {
       collapse: false,
-      userDropdown: [
-        {
-          name: "首页",
-        },
-        {
-          name: "登出",
-        },
-      ],
+      loading: false,
     };
   },
   methods: {
@@ -48,6 +37,14 @@ export default {
     showCollapseHandler() {
       this.collapse = !this.collapse;
       this.$bus.$emit("showCollapse");
+    },
+    goHome(){
+      this.$router.push(`/`);
+    },
+    // 登出
+    async logout() {
+      await this.$store.dispatch("user/logout");
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
   },
   computed: {

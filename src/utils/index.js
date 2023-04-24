@@ -34,11 +34,12 @@ export const awaitWrap = (promise) => {
  * [{a:1]} => [{a:1,orignalData:{a:1},edit:false}]
  */
 
-export const formatData = (array) => {
-  return array.map((item) => {
-    // 然后给bigPileData添加属性edit
-    item.originalData = { ...item };
-    Vue.prototype.$set(item, "edit", false);
-    return item;
-  });
+export const formatTime = (time) => {
+  const toFullDate = (date) => date > 10 ? date : `0${date}` 
+  
+  const date = new Date(time)
+  const year = date.getFullYear()
+  const month = toFullDate(date.getMonth() + 1)
+  const day = toFullDate(date.getDate())
+  return `${year}-${month}-${day}`
 };

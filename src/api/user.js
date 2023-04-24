@@ -15,11 +15,11 @@ export const login = (userInfo) => {
 };
 
 // 登出
-// URL: /user/logout GET
+// URL: /common/logout POST
 export const logout = () => {
   return requests({
-    url: "/user/logout",
-    method: "get",
+    url: "/common/logout",
+    method: "post",
   });
 };
 
@@ -31,3 +31,5 @@ export const getInfo = (token) => {
     method: "get",
   });
 };
+
+

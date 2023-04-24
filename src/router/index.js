@@ -30,10 +30,22 @@ const routes = [
     path: "/",
     name: "home",
     component: Layout,
+    redirect:"/home",
+    children: [{
+      path:"/home",
+      component:() => import("@/views/profile")
+    }],
+  },
+
+  {
+    path: "/task",
+    name: "task",
+    component: Layout,
+    redirect: "noRedirect",
     children: [
       {
-        path: "/task/add",
-        name: "task",
+        path: "add",
+        name: "addTask",
         meta: {
           keepAlive: true,
           title: "发布任务",
@@ -41,8 +53,8 @@ const routes = [
         component: () => import("@/views/task/add"),
       },
       {
-        path: "/task/edit",
-        name: "task",
+        path: "edit",
+        name: "editTask",
         meta: {
           keepAlive: false,
           title: "任务管理",
@@ -50,8 +62,8 @@ const routes = [
         component: () => import("@/views/task/edit"),
       },
       {
-        path: "/task/history",
-        name: "task",
+        path: "history",
+        name: "historyTask",
         meta: {
           keepAlive: false,
           title: "历史任务",
@@ -61,12 +73,42 @@ const routes = [
     ],
   },
 
+  {
+    path: "/contact",
+    name: "contact",
+    component: Layout,
+    redirect: "index",
+    children: [
+      {
+        path: "index",
+        name: "contactList",
+        meta: {
+          keepAlive: false,
+          title: "联系人列表",
+        },
+        component: () => import("@/views/contact"),
+      },
+    ],
+  },
+
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },
 ];
 
-const router = new VueRouter({
-  routes,
-});
+
+const createRouter = () => new VueRouter({
+  // mode: 'history', // 需要后端支持
+  scrollBehavior: () => ({ y: 0 }),
+  routes: routes
+})
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  // 重新设置路由
+  router.matcher = newRouter.matcher
+}
 
 export default router;

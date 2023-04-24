@@ -3,7 +3,7 @@
   <div>
     <el-form
       class="task-form"
-      ref="form"
+      ref="taskForm"
       :model="taskForm"
       :rules="taskRules"
       label-width="80px"
@@ -24,12 +24,12 @@
       </el-form-item>
 
       <!-- 富文本编辑器 -->
-      <div>
+      <el-form-item label="任务内容" prop="taskText">
         <tinymce v-model="taskForm.taskText" :height="300" />
-      </div>
+      </el-form-item>
 
       <!-- 员工列表 -->
-      <StaffList />
+      <StaffList ref="staff" />
 
       <!-- 表单的提交按钮 -->
       <el-form-item size="large" class="task-form-btn">
@@ -64,7 +64,10 @@ export default {
           },
         ],
         taskType: [
-          { required: true, message: "请选择任务类型", trigger: "blur" },
+          { required: true, message: "请输入任务标题", trigger: "blur" },
+        ],
+        taskText: [
+          { required: true, message: "请输入任务内容", trigger: "blur" },
         ],
       },
       // 任务类型的options
@@ -80,7 +83,30 @@ export default {
 
   methods: {
     onSubmit() {
-      console.log("submit!");
+      // 当前选中员工列表
+      const staffList = this.$refs["staff"].checkedList;
+      this.$refs["taskForm"].validate((valid) => {
+        if (valid) {
+          if (staffList.length === 0) {
+            // 请选择员工
+            this.$message({
+              message: "请选择要发布任务的员工",
+              type: "warning",
+            });
+          }else{
+            console.log({
+              taskForm:this.taskForm,
+              staffList
+            })
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    getStaffList(staffList) {
+      console.log(staffList);
     },
   },
 };

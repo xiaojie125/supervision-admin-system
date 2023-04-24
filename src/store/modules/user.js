@@ -7,6 +7,8 @@ const getDefaultState = () => {
     token: getToken(),
     username: "",
     avatar: "",
+    // 用户的基本信息
+    userInfo:{}
   };
 };
 
@@ -25,6 +27,9 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar;
   },
+  SET_USERINFO:(state,userInfo) =>{
+    state.userInfo = userInfo
+  }
 };
 
 const actions = {
@@ -69,6 +74,7 @@ const actions = {
 
           commit("SET_USERNAME", username);
           commit("SET_AVATAR", avatar);
+          commit("SET_USERINFO", data);
           resolve(data);
         })
         .catch((error) => {
@@ -77,19 +83,25 @@ const actions = {
     });
   },
 
-  // user logout
+  // 退出登录
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token)
-        .then(() => {
-          removeToken(); // must remove  token  first
-          resetRouter();
-          commit("RESET_STATE");
-          resolve();
-        })
-        .catch((error) => {
-          reject(error);
-        });
+      // 首先移除token
+      removeToken();
+      resetRouter();
+      commit("RESET_STATE");
+      resolve();
+      // logout(state.token)
+      //   .then(() => {
+      //     // 首先移除token
+      //     removeToken();
+      //     resetRouter();
+      //     commit("RESET_STATE");
+      //     resolve();
+      //   })
+      //   .catch((error) => {
+      //     reject(error);
+      //   });
     });
   },
 

@@ -52,6 +52,16 @@ export default {
     return {
       menu: [
         {
+          label: "首页",
+          icon: "s-home",
+          path: "/",
+        },
+        {
+          label: "联系人",
+          icon: "user-solid",
+          path: "/contact/index",
+        },
+        {
           label: "任务",
           icon: "s-order",
           children: [

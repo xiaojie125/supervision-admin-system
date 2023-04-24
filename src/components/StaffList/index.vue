@@ -48,7 +48,6 @@ export default {
       isIndeterminate: true,
     };
   },
-  props: ["getStaffList"],
   created() {
     this.init();
   },

@@ -9,9 +9,6 @@ import '@/plugins/elementui'
 // 引入权限管理
 import "@/permission"
 
-// 引入icon
-import "@/icons"
-
 Vue.config.productionTip = false
 
 new Vue({

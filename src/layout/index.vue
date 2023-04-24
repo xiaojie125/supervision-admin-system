@@ -12,7 +12,7 @@
         <Header />
       </el-header>
       <!-- 核心内容部分 -->
-      <el-main>
+      <el-main style="margin-top:20px">
         <transition name="fade" mode="out-in">
           <keep-alive>
             <router-view v-if="$route.meta.keepAlive"></router-view>

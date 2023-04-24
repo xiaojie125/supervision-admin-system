@@ -16,6 +16,9 @@ NProgress.configure({ showSpinner: false })
 const whiteList = ['/login']
 
 router.beforeEach(async(to, from, next) => {
+  // // 临时处理
+  // next()
+  // return
   // 进度条开始
   NProgress.start()
 

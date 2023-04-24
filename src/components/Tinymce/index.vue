@@ -1,3 +1,4 @@
+<!-- 富文本编辑器 -->
 <template>
   <div :class="{fullscreen:fullscreen}" class="tinymce-container" :style="{width:containerWidth}">
     <textarea :id="tinymceId" class="tinymce-textarea" />
