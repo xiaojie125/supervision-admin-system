@@ -7,7 +7,7 @@
         :label="task.label"
         v-for="task in taskTitle"
         :key="task.prop"
-        :width="task.width ? task.width : 100"
+        :width="task.width ? task.width : 80"
         align="center"
         :sortable="task.sortable"
       >

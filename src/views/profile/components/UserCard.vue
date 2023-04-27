@@ -38,14 +38,14 @@
       <div class="user-skills user-bio-section">
         <div class="user-bio-section-header">
           <!-- <svg-icon icon-class="skill" /> -->
-          <span>每日签到</span>
+          <span>每日打卡</span>
           <el-button
             type="primary"
             @click="signInHandler"
             :disabled="isSignIn"
             :loading="signInLoading"
           >
-            {{ isSignIn ? "已签到" : "签到" }}
+            {{ isSignIn ? "已打卡" : "打卡" }}
           </el-button>
         </div>
 

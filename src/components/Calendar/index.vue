@@ -7,6 +7,7 @@
           slot="reference"
           :class="{ 'signed-in': !isSignInHandler(date) }"
           style="position: relative; z-index: 10"
+          @click="checkSignInInfo(date)"
         >
           <p>{{ data.day.split("-").slice(2).join("-") }}</p>
         </div>
@@ -40,6 +41,7 @@
 <script>
 import { getSignInInfo } from "@/api/userInfo";
 import { awaitWrap, formatTime } from "@/utils";
+import moment from "moment";
 
 export default {
   name: "Calendar",
@@ -97,6 +99,19 @@ export default {
         // 否则直接返回
         return true;
       }
+    },
+
+    // 查看签到的信息
+    checkSignInInfo(date) {
+      // 首先判断点击的是否签到了 如果没有签到 则直接返回
+      if(this.isSignInHandler(date)){
+        return
+      }
+      // 签到了 那么寻找签到的信息
+      // this.signIn.indexOf(time)
+      console.log(this.signIn)
+      // const clickDate = moment(date).format("YYYY-MM-DD HH:mm:ss")
+      // console.log(clickDate)
     },
 
     skip(flag) {

@@ -30,11 +30,13 @@ const routes = [
     path: "/",
     name: "home",
     component: Layout,
-    redirect:"/home",
-    children: [{
-      path:"/home",
-      component:() => import("@/views/profile")
-    }],
+    redirect: "/home",
+    children: [
+      {
+        path: "/home",
+        component: () => import("@/views/profile"),
+      },
+    ],
   },
 
   {
@@ -91,24 +93,42 @@ const routes = [
     ],
   },
 
+  {
+    path: "/staff",
+    name: "staff",
+    component: Layout,
+    redirect: "index",
+    children: [
+      {
+        path: "index",
+        name: "staff",
+        meta: {
+          keepAlive: false,
+          title: "员工管理",
+        },
+        component: () => import("@/views/staff"),
+      },
+    ],
+  },
+
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },
 ];
 
+const createRouter = () =>
+  new VueRouter({
+    // mode: 'history', // 需要后端支持
+    scrollBehavior: () => ({ y: 0 }),
+    routes: routes,
+  });
 
-const createRouter = () => new VueRouter({
-  // mode: 'history', // 需要后端支持
-  scrollBehavior: () => ({ y: 0 }),
-  routes: routes
-})
-
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  const newRouter = createRouter()
+  const newRouter = createRouter();
   // 重新设置路由
-  router.matcher = newRouter.matcher
+  router.matcher = newRouter.matcher;
 }
 
 export default router;

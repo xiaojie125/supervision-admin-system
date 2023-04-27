@@ -23,13 +23,5 @@ export const logout = () => {
   });
 };
 
-// 获取用户信息 通过token来获取
-// URL: /user/getInfo GET
-export const getInfo = (token) => {
-  return requests({
-    url: "/common/getUserInfo",
-    method: "get",
-  });
-};
 
 

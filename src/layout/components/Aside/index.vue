@@ -62,6 +62,11 @@ export default {
           path: "/contact/index",
         },
         {
+          label: "员工",
+          icon: "user-solid",
+          path: "/staff/index",
+        },
+        {
           label: "任务",
           icon: "s-order",
           children: [

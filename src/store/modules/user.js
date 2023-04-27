@@ -1,4 +1,5 @@
-import { login, logout, getInfo } from "@/api/user";
+import { login, logout } from "@/api/user";
+import { getInfo } from "@/api/userInfo";
 import { getToken, setToken, removeToken } from "@/utils/auth";
 import { resetRouter } from "@/router";
 
@@ -8,7 +9,7 @@ const getDefaultState = () => {
     username: "",
     avatar: "",
     // 用户的基本信息
-    userInfo:{}
+    userInfo: {},
   };
 };
 
@@ -27,9 +28,9 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar;
   },
-  SET_USERINFO:(state,userInfo) =>{
-    state.userInfo = userInfo
-  }
+  SET_USERINFO: (state, userInfo) => {
+    state.userInfo = userInfo;
+  },
 };
 
 const actions = {

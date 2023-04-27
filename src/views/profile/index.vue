@@ -4,7 +4,7 @@
     <div v-if="user">
       <el-row :gutter="20">
         <el-col :span="6" :xs="24">
-          <user-card :user="user" />
+          <user-card :user="userInfo" />
         </el-col>
 
         <el-col :span="18" :xs="24">
@@ -20,7 +20,7 @@
                 <meeting />
               </el-tab-pane>
               <el-tab-pane label="个人信息" name="account">
-                <account :user="user" />
+                <account :user="userInfo" />
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     getUser() {
-      // console.log("userInfo", this.userInfo);
       this.user = this.userInfo;
     },
   },

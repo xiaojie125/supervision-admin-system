@@ -1,5 +1,24 @@
 import requests from "@/utils/request";
 
+// 获取用户信息 通过token来获取
+// URL: /user/userInfo GET
+export const getInfo = () => {
+  return requests({
+    url: "/my/userInfo",
+    method: "get",
+  });
+};
+
+// 更新用户信息 通过token来获取
+// URL: /user/userInfo GET
+export const updateInfo = (userInfo) => {
+  return requests({
+    url: "/my/userInfo",
+    method: "post",
+    data: userInfo,
+  });
+};
+
 // 获取用户签到信息 通过userId来获取
 // URL: /my/signInInfo GET
 export const getSignInInfo = (userId) => {

@@ -12,7 +12,7 @@
         <Header />
       </el-header>
       <!-- 核心内容部分 -->
-      <el-main style="margin-top:20px">
+      <el-main style="margin-top: 20px">
         <transition name="fade" mode="out-in">
           <keep-alive>
             <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -20,24 +20,34 @@
         </transition>
         <router-view v-if="!$route.meta.keepAlive"></router-view>
       </el-main>
+      <!-- 悬浮 -->
+      <right-panel v-if="showPersonal">
+        <personal />
+      </right-panel>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import Aside from "./Aside";
-import Header from "./Header";
+import RightPanel from "@/components/RightPanel";
+import { mapState } from "vuex";
+import Aside from "./components/Aside";
+import Header from "./components/Header";
+import Personal from "./components/Personal";
+
 export default {
   name: "layout",
   data() {
     return {};
   },
 
-  components: { Aside, Header },
+  computed: {
+    ...mapState({
+      showPersonal: (state) => state.personal.showPersonal,
+    }),
+  },
 
-  computed: {},
-
-  methods: {},
+  components: { Aside, Header, Personal, RightPanel },
 };
 </script>
 <style lang="scss" scoped>
@@ -49,6 +59,9 @@ export default {
   }
   .el-main {
     padding-top: 0;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
   }
 }
 </style>
