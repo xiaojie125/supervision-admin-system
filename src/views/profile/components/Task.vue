@@ -17,7 +17,12 @@
           <el-button type="primary" size="mini" @click="checkTaskTimeline(row)"
             >查看</el-button
           >
-          <el-button type="success" size="mini">发布</el-button>
+          <el-button
+            type="success"
+            size="mini"
+            @click="addEditTaskVisible = true"
+            >发布</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -29,6 +34,51 @@
       @dragDialog="handleDrag"
     >
       <timeline />
+    </el-dialog>
+    <!-- 发布新的任务动作 -->
+    <!-- 发布动态 -->
+    <el-dialog
+      title="发布新的任务操作"
+      :visible.sync="addEditTaskVisible"
+      width="30%"
+      center
+      v-loading="addEditTaskLoading"
+    >
+      <el-form ref="editTaskForm" label-width="100px" class="edit-task-form">
+        <el-form-item>
+          <el-input v-model="editTaskForm.editTitle" placeholder="标题"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            type="textarea"
+            v-model="activityContent"
+            placeholder="操作内容"
+          ></el-input>
+        </el-form-item>
+        <!-- 上传图片 -->
+        <el-form-item>
+          <el-upload
+            :headers="headers"
+            :multiple="true"
+            :file-list="fileList"
+            :show-file-list="true"
+            :on-remove="handleRemove"
+            :on-success="handleSuccess"
+            :before-upload="beforeUpload"
+            class="editor-slide-upload"
+            :action="action"
+            list-type="picture-card"
+            :limit="9"
+            :on-exceed="handleExceed"
+          >
+            <i slot="default" class="el-icon-plus"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleSubmit()">提交</el-button>
+          <el-button @click="handleCancle()">取消</el-button>
+        </el-form-item>
+      </el-form>
     </el-dialog>
   </div>
 </template>
@@ -81,6 +131,14 @@ export default {
       // 控制打开可拖拽盒子
       dialogTableVisible: false,
       dialogTitle: "",
+      // 发布新的任务盒子
+      addEditTaskVisible: false,
+      addEditTaskLoading: false,
+      editTaskForm: {
+        editTitle: "",
+        editContent: "",
+        editPhoto: [],
+      },
     };
   },
   directives: { elDragDialog },

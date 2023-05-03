@@ -80,6 +80,32 @@ export default {
               label: "任务管理",
               icon: "edit-outline",
             },
+            {
+              path: "/task/history",
+              label: "任务历史",
+              icon: "edit-outline",
+            },
+          ],
+        },
+        {
+          label: "会议",
+          icon: "s-order",
+          children: [
+            {
+              path: "/conference/add",
+              label: "发布会议",
+              icon: "edit-outline",
+            },
+            {
+              path: "/conference/edit",
+              label: "会议管理",
+              icon: "edit-outline",
+            },
+            {
+              path: "/conference/history",
+              label: "会议历史",
+              icon: "edit-outline",
+            },
           ],
         },
       ],

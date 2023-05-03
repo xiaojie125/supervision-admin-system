@@ -1,11 +1,11 @@
-<!-- 任务历史 -->
+<!-- 历史会议 -->
 <template>
-  <div>任务历史</div>
+  <div>历史会议</div>
 </template>
 
 <script>
 export default {
-  name:'TaskHistory',
+  name:'ConferenceHistory',
   data () {
     return {
     };

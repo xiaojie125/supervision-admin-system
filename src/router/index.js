@@ -39,6 +39,7 @@ const routes = [
     ],
   },
 
+  /** 任务 */
   {
     path: "/task",
     name: "task",
@@ -75,6 +76,44 @@ const routes = [
     ],
   },
 
+  /** 会议 */
+  {
+    path: "/conference",
+    name: "conference",
+    component: Layout,
+    redirect: "noRedirect",
+    children: [
+      {
+        path: "add",
+        name: "addConference",
+        meta: {
+          keepAlive: true,
+          title: "发布会议",
+        },
+        component: () => import("@/views/conference/add"),
+      },
+      {
+        path: "edit",
+        name: "editConference",
+        meta: {
+          keepAlive: false,
+          title: "会议管理",
+        },
+        component: () => import("@/views/conference/edit"),
+      },
+      {
+        path: "history",
+        name: "historyConference",
+        meta: {
+          keepAlive: false,
+          title: "历史会议",
+        },
+        component: () => import("@/views/conference/history"),
+      },
+    ],
+  },
+
+  /** 联系人 */
   {
     path: "/contact",
     name: "contact",
@@ -93,6 +132,7 @@ const routes = [
     ],
   },
 
+  /** 员工 */
   {
     path: "/staff",
     name: "staff",

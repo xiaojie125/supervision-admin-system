@@ -9,6 +9,13 @@ import '@/plugins/elementui'
 // 引入权限管理
 import "@/permission"
 
+// 全局过滤器
+import * as filters from './filters'
+// 注册全局过滤器
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+
 Vue.config.productionTip = false
 
 new Vue({

@@ -10,16 +10,26 @@
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
-              <el-tab-pane label="Activity" name="activity">
-                <activity />
+              <el-tab-pane
+                label="动态"
+                name="activity"
+                lazy
+                class="tab-content"
+              >
+                <activity :user="userInfo" />
               </el-tab-pane>
-              <el-tab-pane label="任务" name="task">
+              <el-tab-pane label="任务" name="task" lazy class="tab-content">
                 <task :userId="userInfo.userId" />
               </el-tab-pane>
-              <el-tab-pane label="会议" name="meeting">
+              <el-tab-pane label="会议" name="meeting" lazy class="tab-content">
                 <meeting />
               </el-tab-pane>
-              <el-tab-pane label="个人信息" name="account">
+              <el-tab-pane
+                label="个人信息"
+                name="account"
+                lazy
+                class="tab-content"
+              >
                 <account :user="userInfo" />
               </el-tab-pane>
             </el-tabs>
@@ -60,3 +70,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.tab-content {
+  max-height: 680px;
+  overflow-y: auto;
+}
+</style>
